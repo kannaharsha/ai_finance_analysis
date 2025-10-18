@@ -10,7 +10,6 @@
             margin: 0;
             color: #333;
         }
-
         header {
             background: linear-gradient(90deg, #00695c, #43a047);
             color: white;
@@ -18,15 +17,9 @@
             padding: 20px;
             box-shadow: 0 3px 10px rgba(0,0,0,0.2);
         }
-
         header h1 { margin: 0; font-size: 24px; }
 
-        .container {
-            max-width: 1100px;
-            margin: 25px auto;
-            padding: 0 20px;
-        }
-
+        .container { max-width: 1100px; margin: 25px auto; padding: 0 20px; }
         .upload-box {
             background: white;
             padding: 15px;
@@ -34,14 +27,12 @@
             box-shadow: 0 2px 6px rgba(0,0,0,0.1);
             text-align: center;
         }
-
         input[type="file"] {
             border: 1px solid #ccc;
             border-radius: 6px;
             padding: 8px;
             width: 60%;
         }
-
         button {
             background: linear-gradient(90deg, #4CAF50, #45A049);
             color: white;
@@ -56,7 +47,6 @@
             transform: scale(1.05);
             box-shadow: 0 4px 12px rgba(0,0,0,0.2);
         }
-
         .stats-cards {
             display: flex;
             flex-wrap: wrap;
@@ -64,7 +54,6 @@
             justify-content: space-between;
             margin: 25px 0;
         }
-
         .card {
             flex: 1;
             min-width: 180px;
@@ -74,7 +63,6 @@
             text-align: center;
             box-shadow: 0 2px 6px rgba(0,0,0,0.1);
         }
-
         .card h3 { color: #00695c; font-size: 15px; margin: 4px 0; }
         .card p { font-size: 17px; font-weight: bold; }
 
@@ -94,17 +82,8 @@
             margin-top: 10px;
             font-size: 13px;
         }
-
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-
-        th {
-            background: #43a047;
-            color: white;
-        }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background: #43a047; color: white; }
 
         #searchBox {
             margin-bottom: 8px;
@@ -114,34 +93,12 @@
             width: 40%;
         }
 
-        .pagination {
-            margin-top: 10px;
-            text-align: center;
-        }
+        .pagination { margin-top: 10px; text-align: center; }
+        .pagination button { margin: 0 5px; padding: 5px 10px; background: #00695c; color: white; border-radius: 6px; border: none; }
+        .pagination button:disabled { background: #ccc; cursor: not-allowed; }
 
-        .pagination button {
-            margin: 0 5px;
-            padding: 5px 10px;
-            background: #00695c;
-            color: white;
-            border-radius: 6px;
-            border: none;
-        }
-
-        .pagination button:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-        }
-
-        #chartContainer {
-            text-align: center;
-        }
-
-        canvas {
-            max-width: 300px;
-            height: 300px;
-            margin: auto;
-        }
+        #chartContainer { text-align: center; }
+        canvas { max-width: 300px; height: 300px; margin: auto; }
 
         .toggle-btn {
             color: #00695c;
@@ -159,249 +116,233 @@
     </style>
 </head>
 <body>
-    <header>
-        <h1>AI Personal Finance Dashboard</h1>
-    </header>
+<header>
+    <h1>Financio</h1>
+</header>
 
-    <div class="container">
-        <div class="upload-box">
-            <h2>Upload Transaction File (CSV)</h2>
-            <input type="file" id="csvFile">
-            <button onclick="uploadCSV()">Upload</button>
-        </div>
-
-        <div class="stats-cards" id="summaryCards">
-            <div class="card"><h3>Income</h3><p id="incomeVal">--</p></div>
-            <div class="card"><h3>Expenses</h3><p id="expenseVal">--</p></div>
-            <div class="card"><h3>Savings %</h3><p id="savingsVal">--</p></div>
-        </div>
-        
-        
-        <section id="transactions">
-            <h2>Categorized Transactions</h2>
-            <input type="text" id="searchBox" placeholder="Search by description/category/type..." onkeyup="filterTable()">
-            <button onclick="downloadTransactionsCSV()">Download Transactions CSV</button>
-            <table id="transactionTable">
-                <thead>
-                    <tr>
-                        <th>Date</th>
-                        <th>Description</th>
-                        <th>Amount</th>
-                        <th>Type</th>
-                        <th>Category</th>
-                    </tr>
-                </thead>
-                <tbody></tbody>
-            </table>
-            <div class="pagination">
-                <button id="prevBtn" onclick="changePage(-1)">Prev</button>
-                <span id="pageInfo"></span>
-                <button id="nextBtn" onclick="changePage(1)">Next</button>
-            </div>
-        </section>
-
-        <section id="budgetContainer">
-            <h2>Budget Summary</h2>
-            <table id="budgetTable">
-                <thead>
-                    <tr>
-                        <th>Category</th>
-                        <th>Spent</th>
-                        <th>Budget</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody></tbody>
-            </table>
-            <button class="toggle-btn" onclick="toggleBudget()">View All</button>
-        </section>
-        <section id="adviceContainer">
-            <h2>Financial Advice</h2>
-            <button onclick="downloadAdvice()">Download Advice</button>
-            <ul id="advice"></ul>
-        </section>
-        <section id="chartContainer">
-            <h2> Expense Distribution</h2>
-            <button onclick="downloadChart()">Download Chart</button>
-            <canvas id="expenseChart"></canvas>
-        </section>
+<div class="container">
+    <div class="upload-box">
+        <h2>Upload Transaction File (CSV)</h2>
+        <input type="file" id="csvFile">
+        <button onclick="uploadCSV()">Upload</button>
     </div>
 
-    <script>
-        let allTransactions = [];
-        let currentPage = 1;
-        const rowsPerPage = 10;
-        let budgetData = {};
-        let showAllBudget = false;
+    <div class="stats-cards" id="summaryCards">
+        <div class="card"><h3>Income</h3><p id="incomeVal">--</p></div>
+        <div class="card"><h3>Expenses</h3><p id="expenseVal">--</p></div>
+        <div class="card"><h3>Savings %</h3><p id="savingsVal">--</p></div>
+    </div>
 
-        async function uploadCSV() {
-            const fileInput = document.getElementById('csvFile');
-            if (!fileInput.files[0]) return alert("Select a CSV file.");
-            const formData = new FormData();
-            formData.append('file', fileInput.files[0]);
+    <section id="transactions">
+        <h2>Categorized Transactions</h2>
+        <input type="text" id="searchBox" placeholder="Search..." onkeyup="filterTable()">
+        <button onclick="downloadTransactionsCSV()">Download Transactions CSV</button>
+        <table id="transactionTable">
+            <thead>
+                <tr><th>Date</th><th>Description</th><th>Amount</th><th>Type</th><th>Category</th></tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <div class="pagination">
+            <button id="prevBtn" onclick="changePage(-1)">Prev</button>
+            <span id="pageInfo"></span>
+            <button id="nextBtn" onclick="changePage(1)">Next</button>
+        </div>
+    </section>
 
-            const res = await fetch('http://127.0.0.1:5000/upload', { method: 'POST', body: formData });
-            const data = await res.json();
-            if (res.ok) {
-                allTransactions = data.transactions;
-                displayPage();
-                fetchAdvice();
-            } else alert(data.error);
-        }
+    <section id="budgetContainer">
+        <h2>Budget Summary</h2>
+        <table id="budgetTable">
+            <thead><tr><th>Category</th><th>Spent</th><th>Budget</th><th>Status</th></tr></thead>
+            <tbody></tbody>
+        </table>
+        <button class="toggle-btn" onclick="toggleBudget()">View All</button>
+    </section>
 
-        async function fetchAdvice() {
+    <section id="adviceContainer">
+        <h2>Financial Advice</h2>
+        <button onclick="downloadAdvice()">Download Advice</button>
+        <ul id="advice"></ul>
+    </section>
+
+    <section id="insightsContainer">
+        <h2>Top Expenses & Category %</h2>
+        <table id="topExpensesTable">
+            <thead><tr><th>Date</th><th>Description</th><th>Amount</th><th>Category</th></tr></thead>
+            <tbody></tbody>
+        </table>
+        <div id="categoryPercentages"></div>
+    </section>
+
+    <section id="chartContainer">
+        <h2>Expense Distribution</h2>
+        <button onclick="downloadChart()">Download Chart</button>
+        <canvas id="expenseChart"></canvas>
+    </section>
+</div>
+
+<script>
+let allTransactions = [], currentPage = 1, rowsPerPage = 10, budgetData = {}, showAllBudget=false;
+
+async function uploadCSV() {
+    const fileInput = document.getElementById('csvFile');
+    if(!fileInput.files[0]) return alert("Select a CSV file.");
+    const formData = new FormData();
+    formData.append('file', fileInput.files[0]);
+
+    const res = await fetch('http://127.0.0.1:5000/upload', {method:'POST', body:formData});
+    const data = await res.json();
+    if(res.ok){
+        allTransactions = data.transactions;
+        displayPage();
+        fetchAdvice();
+    } else alert(data.error);
+}
+
+async function fetchAdvice() {
     try {
         const res = await fetch('http://127.0.0.1:5000/recommend');
         const data = await res.json();
-        console.log("Advice Data:", data);  // ✅ Add this line
+
         displayAdvice(data.advice);
         displayChart(data.category_totals);
         displayBudget(data.budget_info);
+        updateSummary(data.monthly_summary);           // shows income/expenses/savings
+        displayTopExpenses(data.top_expenses);         // shows top 5 expenses
+        displayCategoryPercentages(data.category_pct); // shows category %
     } catch (err) {
         alert("Error fetching advice: " + err.message);
     }
 }
+displayTopExpenses(data.top_expenses);
+displayCategoryPercentages(data.category_pct);
 
 
-        function displayPage() {
-            const tbody = document.querySelector("#transactionTable tbody");
-            tbody.innerHTML = "";
-            const start = (currentPage - 1) * rowsPerPage;
-            const end = start + rowsPerPage;
-            const pageData = allTransactions.slice(start, end);
-            pageData.forEach(t => {
-                const row = document.createElement("tr");
-                row.innerHTML = `<td>${t.Date || ''}</td>
-                                 <td>${t.Description || ''}</td>
-                                 <td>${t.Amount}</td>
-                                 <td>${t.Type}</td>
-                                 <td>${t.Category || ''}</td>`;
-                tbody.appendChild(row);
-            });
-            document.getElementById('pageInfo').textContent = `Page ${currentPage} of ${Math.ceil(allTransactions.length / rowsPerPage)}`;
-            document.getElementById('prevBtn').disabled = currentPage === 1;
-            document.getElementById('nextBtn').disabled = end >= allTransactions.length;
-        }
+function displayAdvice(adviceText){
+    const adviceList = document.getElementById("advice");
+    adviceList.innerHTML="";
+    if(!adviceText || adviceText.trim()===""){ adviceList.innerHTML="<li>No advice available yet.</li>"; return; }
+    adviceText.split("\n").forEach(line=>{
+        if(line.trim()){ const li=document.createElement("li"); li.textContent=line; adviceList.appendChild(li);}
+    });
+}
 
-        function changePage(dir) {
-            currentPage += dir;
-            displayPage();
-        }
+function displayPage(){
+    const tbody=document.querySelector("#transactionTable tbody");
+    tbody.innerHTML="";
+    const start=(currentPage-1)*rowsPerPage;
+    const end=start+rowsPerPage;
+    const pageData=allTransactions.slice(start,end);
+    pageData.forEach(t=>{
+        const row=document.createElement("tr");
+        row.innerHTML=`<td>${t.Date||''}</td><td>${t.Description||''}</td><td>${t.Amount}</td><td>${t.Type}</td><td>${t.Category||''}</td>`;
+        tbody.appendChild(row);
+    });
+    document.getElementById('pageInfo').textContent=`Page ${currentPage} of ${Math.ceil(allTransactions.length/rowsPerPage)}`;
+    document.getElementById('prevBtn').disabled=currentPage===1;
+    document.getElementById('nextBtn').disabled=end>=allTransactions.length;
+}
 
-        function filterTable() {
-            const query = document.getElementById('searchBox').value.toLowerCase();
-            const filtered = allTransactions.filter(t =>
-                (t.Description || '').toLowerCase().includes(query) ||
-                (t.Category || '').toLowerCase().includes(query) ||
-                (t.Type || '').toLowerCase().includes(query)
-            );
-            const tbody = document.querySelector("#transactionTable tbody");
-            tbody.innerHTML = "";
-            filtered.slice(0, rowsPerPage).forEach(t => {
-                const row = document.createElement("tr");
-                row.innerHTML = `<td>${t.Date || ''}</td>
-                                 <td>${t.Description || ''}</td>
-                                 <td>${t.Amount}</td>
-                                 <td>${t.Type}</td>
-                                 <td>${t.Category || ''}</td>`;
-                tbody.appendChild(row);
-            });
-        }
+function changePage(dir){ currentPage+=dir; displayPage(); }
 
-        function displayBudget(budgetInfo) {
-            budgetData = budgetInfo;
-            renderBudget();
-        }
+function filterTable(){
+    const query=document.getElementById('searchBox').value.toLowerCase();
+    const filtered=allTransactions.filter(t=>
+        (t.Description||'').toLowerCase().includes(query)||
+        (t.Category||'').toLowerCase().includes(query)||
+        (t.Type||'').toLowerCase().includes(query)
+    );
+    const tbody=document.querySelector("#transactionTable tbody");
+    tbody.innerHTML="";
+    filtered.slice(0, rowsPerPage).forEach(t=>{
+        const row=document.createElement("tr");
+        row.innerHTML=`<td>${t.Date||''}</td><td>${t.Description||''}</td><td>${t.Amount}</td><td>${t.Type}</td><td>${t.Category||''}</td>`;
+        tbody.appendChild(row);
+    });
+    document.getElementById('pageInfo').textContent=`Filtered ${filtered.length} results`;
+}
 
-        function renderBudget() {
-            const tbody = document.querySelector("#budgetTable tbody");
-            tbody.innerHTML = "";
-            const entries = Object.entries(budgetData);
-            const toShow = showAllBudget ? entries : entries.slice(0, 5);
-            toShow.forEach(([cat, val]) => {
-                const row = document.createElement("tr");
-                row.innerHTML = `<td>${cat}</td>
-                                 <td>${val.spent}</td>
-                                 <td>${val.budget}</td>
-                                 <td>${val.status}</td>`;
-                tbody.appendChild(row);
-            });
-        }
+function displayBudget(budgetInfo){ budgetData=budgetInfo; renderBudget(); }
 
-        function toggleBudget() {
-            showAllBudget = !showAllBudget;
-            renderBudget();
-            document.querySelector(".toggle-btn").textContent = showAllBudget ? "Show Less" : "View All";
-        }
+function renderBudget(){
+    const tbody=document.querySelector("#budgetTable tbody");
+    tbody.innerHTML="";
+    const entries=Object.entries(budgetData);
+    const toShow=showAllBudget ? entries : entries.slice(0,5);
+    toShow.forEach(([cat,val])=>{
+        const row=document.createElement("tr");
+        row.innerHTML=`<td>${cat}</td><td>${val.spent}</td><td>${val.budget}</td><td>${val.status}</td>`;
+        tbody.appendChild(row);
+    });
+}
 
-        function displayChart(categoryTotals) {
-            const ctx = document.getElementById('expenseChart').getContext('2d');
-            if (window.expenseChartInstance) window.expenseChartInstance.destroy();
-            window.expenseChartInstance = new Chart(ctx, {
-                type: 'doughnut',
-                data: {
-                    labels: Object.keys(categoryTotals),
-                    datasets: [{
-                        data: Object.values(categoryTotals),
-                        backgroundColor: ['#4CAF50','#FF9800','#F44336','#2196F3','#9C27B0','#FFC107'],
-                    }]
-                },
-                options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
-            });
-        }
+function toggleBudget(){ showAllBudget=!showAllBudget; renderBudget(); document.querySelector(".toggle-btn").textContent=showAllBudget?"Show Less":"View All"; }
 
-        function updateSummary(summary) {
-            document.getElementById('incomeVal').textContent = summary.income.toFixed(2);
-            document.getElementById('expenseVal').textContent = summary.expenses.toFixed(2);
-            document.getElementById('savingsVal').textContent = summary.savings_pct.toFixed(1) + "%";
-        }
-        function downloadTransactionsCSV() {
-            if(allTransactions.length === 0) return alert("No transactions to export.");
-            const query = document.getElementById('searchBox').value.toLowerCase();
-            let filtered = allTransactions;
-            if(query) {
-                filtered = allTransactions.filter(t =>
-                    (t.Description || '').toLowerCase().includes(query) ||
-                    (t.Category || '').toLowerCase().includes(query) ||
-                    (t.Type || '').toLowerCase().includes(query)
-                );
-            }
-            const headers = ["Date","Description","Amount","Type","Category"];
-            const csvRows = [headers.join(",")];
-            filtered.forEach(t => {
-                csvRows.push([t.Date,t.Description,t.Amount,t.Type,t.Category].join(","));
-            });
-            const blob = new Blob([csvRows.join("\n")], { type: 'text/csv' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement("a");
-            a.href = url;
-            a.download = "transactions_export.csv";
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-        }
+function displayChart(categoryTotals){
+    const ctx=document.getElementById('expenseChart').getContext('2d');
+    if(window.expenseChartInstance) window.expenseChartInstance.destroy();
+    window.expenseChartInstance=new Chart(ctx,{
+        type:'doughnut',
+        data:{labels:Object.keys(categoryTotals), datasets:[{data:Object.values(categoryTotals), backgroundColor:['#4CAF50','#FF9800','#F44336','#2196F3','#9C27B0','#FFC107']}]},
+        options:{responsive:true, plugins:{legend:{position:'bottom'}}}
+    });
+}
 
-        function downloadAdvice() {
-            const adviceText = document.getElementById("advice").innerText;
-            if(!adviceText) return alert("No advice to download.");
-            const blob = new Blob([adviceText], { type: 'text/plain' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement("a");
-            a.href = url;
-            a.download = "financial_advice.txt";
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-        }
+function updateSummary(summary){
+    document.getElementById('incomeVal').textContent=summary.income.toFixed(2);
+    document.getElementById('expenseVal').textContent=summary.expenses.toFixed(2);
+    document.getElementById('savingsVal').textContent=summary.savings_pct.toFixed(1)+"%";
+}
 
-        function downloadChart() {
-            if(!window.expenseChartInstance) return alert("No chart to download.");
-            const link = document.createElement("a");
-            link.href = window.expenseChartInstance.toBase64Image();
-            link.download = "expense_chart.png";
-            link.click();
-        }
+function downloadTransactionsCSV(){
+    if(allTransactions.length===0) return alert("No transactions to export.");
+    const query=document.getElementById('searchBox').value.toLowerCase();
+    let filtered=allTransactions;
+    if(query){
+        filtered=allTransactions.filter(t=>(t.Description||'').toLowerCase().includes(query)||(t.Category||'').toLowerCase().includes(query)||(t.Type||'').toLowerCase().includes(query));
+    }
+    const headers=["Date","Description","Amount","Type","Category"];
+    const csvRows=[headers.join(",")];
+    filtered.forEach(t=>{ csvRows.push([t.Date,t.Description,t.Amount,t.Type,t.Category].join(",")); });
+    const blob=new Blob([csvRows.join("\n")],{type:'text/csv'});
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement("a"); a.href=url; a.download="transactions_export.csv"; document.body.appendChild(a); a.click(); document.body.removeChild(a);
+}
 
-    </script>
+function downloadAdvice(){
+    const adviceText=document.getElementById("advice").innerText;
+    if(!adviceText) return alert("No advice to download.");
+    const blob=new Blob([adviceText],{type:'text/plain'});
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement("a"); a.href=url; a.download="financial_advice.txt"; document.body.appendChild(a); a.click(); document.body.removeChild(a);
+}
+
+function downloadChart(){
+    if(!window.expenseChartInstance) return alert("No chart to download.");
+    const link=document.createElement("a");
+    link.href=window.expenseChartInstance.toBase64Image();
+    link.download="expense_chart.png";
+    link.click();
+}
+
+function displayTopExpenses(topList){
+    const tbody=document.querySelector("#topExpensesTable tbody");
+    tbody.innerHTML="";
+    topList.forEach(t=>{
+        const row=document.createElement("tr");
+        row.innerHTML=`<td>${t.Date}</td><td>${t.Description}</td><td>${t.Amount}</td><td>${t.Category}</td>`;
+        tbody.appendChild(row);
+    });
+}
+
+function displayCategoryPercentages(categoryPct){
+    const container=document.getElementById("categoryPercentages");
+    container.innerHTML="<h3>Category Percentages</h3>";
+    for(const cat in categoryPct){
+        container.innerHTML+=`<p>${cat}: ${categoryPct[cat]}%</p>`;
+    }
+}
+
+</script>
 </body>
 </html>
